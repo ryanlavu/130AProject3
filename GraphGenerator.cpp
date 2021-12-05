@@ -7,6 +7,8 @@ class GraphGenerator {
 
 	public:
 
+		Node * avlTreeRoot;
+
 		// struct used to create the adj list linked list
 		struct llNode {
 
@@ -129,6 +131,45 @@ class GraphGenerator {
 
 		}
 
+		// function that finds a node in the tree
+		Node * lookup(Node * node, int data) {
 
+			// base cases for if the value is found or not
+			if(node == NULL) return NULL;
+			else if(node->number == data) return node;
+
+			// goes to the correct child depending on data comparison
+			if(data < node->number) return lookup(node->leftChild, data);
+			else if(data > node->number) return lookup(node->rightChild, data);
+
+		}
+
+		// function that inserts a llNode into a linked list
+		void llInsert(llNode * start, int data) {
+
+			llNode * current = start;
+
+			while(current->next) {
+
+				// if value already exists in the list
+				if(current->number == data) return;
+
+			}
+
+			llNode * newLLNode = new llNode();
+			newLLNode->number = data;
+
+			current->next = newLLNode;
+
+		}
+
+		// function that checks if vertex exists and if not it inserts
+		void insertVertex(int data) {
+
+			Node * searched = lookup(avlTreeRoot, data);
+
+			if(searched == NULL) avlTreeRoot = insert(avlTreeRoot, data);
+
+		}
 
 }

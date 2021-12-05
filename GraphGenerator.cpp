@@ -166,9 +166,52 @@ class GraphGenerator {
 		// function that checks if vertex exists and if not it inserts
 		void insertVertex(int data) {
 
+			// lookup to see if the vertex already exists
 			Node * searched = lookup(avlTreeRoot, data);
 
+			// if it doesn't exist insert
 			if(searched == NULL) avlTreeRoot = insert(avlTreeRoot, data);
+
+		}
+
+		// function that inserts an edge into the adj list
+		void insertEdge(int first, int second) {
+
+			// create two nodes to store vertices from lookup
+			Node * firstVertex = lookup(first);
+			Node * secondVertex = lookup(second);
+
+			// insert into the others adj list
+			llInsert(firstVertex->adjList, second);
+			llInsert(secondVertex->adjList, first);
+
+		}
+
+		// print the AVL tree "in order"
+		void inOrder(Node * node) {
+
+			// base case when it reaches a leaf
+			if(node == NULL) return;
+
+			// inorder prints left -> root -> right
+			inOrder(node->leftChild);
+			cout << node->number << " ";
+			inOrder(node->rightChild);
+
+		}
+
+		// print the AVL tree "pre order"
+		void preOrder(Node * node) {
+
+			// base case when it reaches a leaf
+			if(node == NULL) return;
+
+			// prints the value of the node
+			cout << node->number << " ";
+
+			// preorder prints left before right
+			preOrder(node->leftChild);
+			preOrder(node->rightChild);
 
 		}
 

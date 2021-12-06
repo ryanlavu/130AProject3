@@ -30,7 +30,8 @@ class GraphGenerator {
 			int height;
 
 		}
-
+		
+		//Constructs GraphGenerator object with input file
 		GraphGenerator(string inputFile1)
 		{	
 			//insert into heaps
@@ -57,6 +58,9 @@ class GraphGenerator {
 
 			node->number = data;
 			node->leftChild = NULL;
+                        }
+}
+
 			node->rightChild = NULL;
 			node->height = 1;
 

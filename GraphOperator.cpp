@@ -57,18 +57,24 @@ class GraphOperator {
 				//Found a new component, increment the 2d vector
 				bfsVectorCounter++;
 
-				//If starting vertice not visited, mark it as visited and push 
+				//If starting vertice not visited, mark it as visited and push the vertice onto vector 
                                 visitedBFS[start] = true;
 				vectorBFS[bfsVectorCounter].push_back(start);	
 
-                                llNode * curr = graph.getAdjList(start);
+				//let the current vertice be pushed onto queueAdj
+                                llNode * curr;
 				queueAdj.push_back(start);
 
-				while(!queueAdj.empty)
+				//only stop looking when no more connected vertices left
+				while(!queueAdj.empty())
 				{
+					//let the current vertice be grabbed from queueAdj
 					curr = graph.getAdjList(queueAdj.pop_back)();
+
+					//only stop looking at adjacent vertices of the current vertice when there are no more
                                 	while(curr->next)
                                 	{
+						//If a node hasn't been visited already, push it onto the queue, mark it visited, push it onto the vector
                                         	if(!visitedBFS.find(curr->next->number))
                                         	{
                                                 	queueAdj.push_back(curr->next->number);

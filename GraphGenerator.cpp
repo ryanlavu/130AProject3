@@ -117,7 +117,7 @@ class GraphGenerator {
 		Node * insert(Node * node, int data) {
 
 			// create a new node as the leaf
-			if(node == NULL) return newNode(data);
+			if(node == NULL) return createNode(data);
 
 			// inserts to left side if value is less than the node value
 			if(data < node->number) node->leftChild = insert(node->leftChild, data);

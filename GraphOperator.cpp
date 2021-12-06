@@ -24,8 +24,8 @@ class GraphOperator {
 			llNode * curr = graph.getAdjList(start);
 			
 			while(curr->next) {
-				if(visited.find(curr->next->number)) return true;
-				if(!visited.find(curr->next->number)) return isAcyclic(curr->next->number, graph);
+				if(visitedDFS.find(curr->next->number)) return true;
+				if(!visitedDFS.find(curr->next->number)) return isAcyclic(curr->next->number, graph);
 
 			}
 
@@ -40,9 +40,9 @@ class GraphOperator {
 			//Go through entire AVL tree to find all connected components
 			Node * leftNode = root->leftChild;
 			Node * rightNode = root->rightChild;
-			if(leftNode != null)
+			if(leftNode != NULL)
 				connectedComponents(leftNode->number, graph, leftNode);
-			if(rightNode != null)
+			if(rightNode != NULL)
 				connectedComponents(rightNode->number, graph, rightNode);
 
 		}
@@ -52,7 +52,7 @@ class GraphOperator {
 		void findConnectedComponents(int start, GraphGenerator graph, Node * root){
 			//create a list of connected vertices
 			vector<int> queueAdj;
-			
+			int vectorBack;
 			//if the starting vertice is already visited, no use in continuing as its connected component already found
 			if(!visitedBFS.find(start))
                         {
@@ -71,7 +71,9 @@ class GraphOperator {
 				while(!queueAdj.empty())
 				{
 					//let the current vertice be grabbed from queueAdj
-					curr = graph.getAdjList(queueAdj.pop_back)();
+					vectorBack = queueAdj.back();
+					curr = graph.getAdjList(vectorBack);
+					queueAdj.pop_back();
 
 					//only stop looking at adjacent vertices of the current vertice when there are no more
                                 	while(curr->next)
@@ -88,10 +90,10 @@ class GraphOperator {
 
 				//Sort and print out the vector
 				sort(vectorBFS[bfsVectorCounter].begin(), vectorBFS[bfsVectorCounter].end());
-				for(int i = 0; i < vectorBFS[bfsVectorCounter].length(); i++)
+				for(int i = 0; i < vectorBFS[bfsVectorCounter].size(); i++)
 				{
 					cout << vectorBFS[bfsVectorCounter][i];
-					if(i < vectorBFS[bfsVectorCounter].length-1)
+					if(i < vectorBFS[bfsVectorCounter].size()-1)
 					{
 						cout << " ";
 					}
@@ -102,4 +104,4 @@ class GraphOperator {
 
 		}
 
-}
+};

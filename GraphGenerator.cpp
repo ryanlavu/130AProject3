@@ -15,7 +15,7 @@ class GraphGenerator {
 			int number;
 			llNode * next;
 
-		}
+		};
 
 		// struct used to create an AVL tree for the adj list
 		struct Node {
@@ -29,7 +29,7 @@ class GraphGenerator {
 			Node * rightChild;
 			int height;
 
-		}
+		};
 		
 		//Constructs GraphGenerator object with input file
 		GraphGenerator(string inputFile1)
@@ -134,16 +134,16 @@ class GraphGenerator {
 
 			// rotate the tree based on the balance
 			if(balance > 1 && data < node->leftChild->number) return rotateRight(node);
-			else if(balance < - 1 && data > node->rightChild->number) return leftRotate(node);
+			else if(balance < - 1 && data > node->rightChild->number) return rotateLeft(node);
 			else if(balance > 1 && data > node->leftChild->number) {
 
 				node->leftChild = rotateLeft(node->leftChild);
-				return rightRotate(node);
+				return rotateRight(node);
 
 			} else if(balance < - 1 && data < node->rightChild->number) {
 
 				node->rightChild = rotateRight(node->rightChild);
-				return leftRotate(node);
+				return rotateLeft(node);
 
 			}
 
@@ -242,4 +242,4 @@ class GraphGenerator {
 
 		}
 
-}
+};

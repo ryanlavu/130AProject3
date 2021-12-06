@@ -215,4 +215,11 @@ class GraphGenerator {
 
 		}
 
+		// function that returns the adj list from data
+		llNode * getAdjList(int data) {
+
+			return lookup(data)->adjList;
+
+		}
+
 }

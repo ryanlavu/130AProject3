@@ -58,9 +58,6 @@ class GraphGenerator {
 
 			node->number = data;
 			node->leftChild = NULL;
-                        }
-}
-
 			node->rightChild = NULL;
 			node->height = 1;
 

@@ -1,3 +1,6 @@
+#ifndef GRAPHO
+#define GRAPHO
+
 #include <iostream>
 #include <map>
 #include <vector>
@@ -6,7 +9,7 @@
 using namespace std;
 
 class GraphOperator {
-
+/*
 	public:
 
 		map<int, bool> visitedDFS;
@@ -103,5 +106,7 @@ class GraphOperator {
 
 
 		}
-
+i*/
 };
+
+#endif

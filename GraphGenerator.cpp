@@ -1,3 +1,6 @@
+#ifndef GRAPHG
+#define GRAPHG
+
 #include <vector>
 #include <iostream>
 #include <fstream>
@@ -244,3 +247,5 @@ class GraphGenerator {
 		}
 
 };
+
+#endif

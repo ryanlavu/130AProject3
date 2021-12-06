@@ -31,6 +31,25 @@ class GraphGenerator {
 
 		}
 
+		GraphGenerator(string inputFile1)
+		{	
+			//insert into heaps
+			string query = "";
+			int data1 = 0;
+			int data2 = 0;
+			ifstream insertFile(inputFile1);
+			while(getline(insertFile, query))
+			{
+				if(query.empty())
+					break;
+				data1 = int(query.substr(0,query.find(",")));
+				data2 = int(query.substr(query.find(",")));
+				insertVertex(data1);
+				insertVertex(data2);
+				insertEdge(data1, data2);
+			}
+			insertFile.close();
+		}
 		// function that initializes a new pointer to a node
 		Node * createNode(int data) {
 

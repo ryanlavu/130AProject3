@@ -47,6 +47,8 @@ class GraphOperator {
 
 		}
 
+		
+
 		void findConnectedComponents(int start, GraphGenerator graph, Node * root){
 			//create a list of connected vertices
 			vector<int> queueAdj;
@@ -83,6 +85,18 @@ class GraphOperator {
                                         	}
                                 	}
 				}
+
+				//Sort and print out the vector
+				sort(vectorBFS[bfsVectorCounter].begin(), vectorBFS[bfsVectorCounter].end());
+				for(int i = 0; i < vectorBFS[bfsVectorCounter].length(); i++)
+				{
+					cout << vectorBFS[bfsVectorCounter][i];
+					if(i < vectorBFS[bfsVectorCounter].length-1)
+					{
+						cout << " ";
+					}
+				}
+				cout << endl;
                         }
 
 

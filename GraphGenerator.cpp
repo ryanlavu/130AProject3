@@ -7,8 +7,6 @@ class GraphGenerator {
 
 	public:
 
-		Node * avlTreeRoot;
-
 		// struct used to create the adj list linked list
 		struct llNode {
 
@@ -30,6 +28,8 @@ class GraphGenerator {
 			int height;
 
 		};
+	
+		Node * avlTreeRoot =  new Node();
 		
 		//Constructs GraphGenerator object with input file
 		GraphGenerator(string inputFile1)
@@ -198,8 +198,8 @@ class GraphGenerator {
 		void insertEdge(int first, int second) {
 
 			// create two nodes to store vertices from lookup
-			Node * firstVertex = lookup(first);
-			Node * secondVertex = lookup(second);
+			Node * firstVertex = lookup(avlTreeRoot, first);
+			Node * secondVertex = lookup(avlTreeRoot, second);
 
 			// insert into the others adj list
 			llInsert(firstVertex->adjList, second);
@@ -238,7 +238,7 @@ class GraphGenerator {
 		// function that returns the adj list from data
 		llNode * getAdjList(int data) {
 
-			return lookup(data)->adjList;
+			return lookup(avlTreeRoot, data)->adjList;
 
 		}
 

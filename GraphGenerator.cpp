@@ -1,5 +1,6 @@
 #include <vector>
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -43,8 +44,8 @@ class GraphGenerator {
 			{
 				if(query.empty())
 					break;
-				data1 = int(query.substr(0,query.find(",")));
-				data2 = int(query.substr(query.find(",")));
+				data1 = stoi(query.substr(0,query.find(",")));
+				data2 = stoi(query.substr(query.find(",")));
 				insertVertex(data1);
 				insertVertex(data2);
 				insertEdge(data1, data2);

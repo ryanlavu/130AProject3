@@ -62,6 +62,8 @@ class GraphGenerator {
 
 			Node * node = new Node();
 
+			adjList == NULL;
+			
 			node->number = data;
 			node->leftChild = NULL;
 			node->rightChild = NULL;
@@ -171,10 +173,27 @@ class GraphGenerator {
 			return NULL;
 
 		}
+	
+		llNode * createLLNodeHead(int data) {
+		
+			llNode * node = new llNode();
+			
+			node->number = data;
+			
+			return node;
+			
+		}
 
 		// function that inserts a llNode into a linked list
 		void llInsert(llNode * start, int data) {
 
+			if(start == NULL) {
+				
+				llNode * temp = createLLNodeHead(data);
+				start = temp;
+				
+			}
+			
 			llNode * current = start;
 
 			while(current->next) {
@@ -193,13 +212,9 @@ class GraphGenerator {
 
 		// function that checks if vertex exists and if not it inserts
 		void insertVertex(int data) {
-
-			cout << "Before lookup" << endl;
 			
 			// lookup to see if the vertex already exists
 			Node * searched = lookup(avlTreeRoot, data);
-			
-			cout << "Before insert" << endl;
 
 			// if it doesn't exist insert
 			if(searched == NULL) avlTreeRoot = insert(avlTreeRoot, data);
@@ -209,10 +224,14 @@ class GraphGenerator {
 		// function that inserts an edge into the adj list
 		void insertEdge(int first, int second) {
 
+			cout << "before insert edge" << endl;
+			
 			// create two nodes to store vertices from lookup
 			Node * firstVertex = lookup(avlTreeRoot, first);
 			Node * secondVertex = lookup(avlTreeRoot, second);
 
+			cout << "before llInsert" << endl;
+			
 			// insert into the others adj list
 			llInsert(firstVertex->adjList, second);
 			llInsert(secondVertex->adjList, first);

@@ -24,6 +24,9 @@ class GraphOperator {
 			cout << "Checking: " << start << endl;
 			
 			visitedDFS[start] = true;
+			
+			cout << "After true init" << endl;
+			
 			llNode * curr = graph.getAdjList(start);
 			
 			while(curr->next) {

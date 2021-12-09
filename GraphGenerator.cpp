@@ -7,32 +7,31 @@
 
 using namespace std;
 
+	// struct used to create the adj list linked list
+	struct llNode {
+
+		int number;
+		llNode * next;
+
+	};
+
+	// struct used to create an AVL tree for the adj list
+	struct Node {
+
+		// data needed to create the adjacency list
+		int number;
+		llNode * adjList;
+
+		// data needed to create and balance the AVL tree
+		Node * leftChild;
+		Node * rightChild;
+		int height;
+
+	};
+
 class GraphGenerator {
 
 	public:
-
-		// struct used to create the adj list linked list
-		struct llNode {
-
-			int number;
-			llNode * next;
-
-		};
-
-		// struct used to create an AVL tree for the adj list
-		struct Node {
-
-			// data needed to create the adjacency list
-			int number;
-			llNode * adjList;
-
-			// data needed to create and balance the AVL tree
-			Node * leftChild;
-			Node * rightChild;
-			int height;
-
-		};
-	
 		Node * avlTreeRoot =  new Node();
 		
 		//Constructs GraphGenerator object with input file

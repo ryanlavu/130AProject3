@@ -32,7 +32,7 @@ using namespace std;
 class GraphGenerator {
 
 	public:
-		Node * avlTreeRoot =  new Node();
+		Node * avlTreeRoot;
 		
 		//Constructs GraphGenerator object with input file
 		GraphGenerator(string inputFile1)

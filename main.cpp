@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
 	cout << endl;
 	
 	cout << "Is acyclic(Yes/No):" << endl;
-	if(op->isAcyclic(graphs))
+	if(op->isAcyclic(0, graphs))
 	{
 		cout << "Yes" << endl;
 	}	

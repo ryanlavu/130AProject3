@@ -29,6 +29,8 @@ class GraphOperator {
 			
 			llNode * curr = graph.getAdjList(start);
 			
+			cout << "After adjList" << endl;
+			
 			while(curr->next) {
 				cout << "Checking for " << start << endl;
 				if(visitedDFS.find(curr->next->number)->second) return true;

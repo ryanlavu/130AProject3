@@ -51,8 +51,8 @@ class GraphGenerator {
 				cout << query.substr(query.find(",") + 1) << endl; 
 				data1 = stoi(query.substr(0,query.find(",")));
 				data2 = stoi(query.substr(query.find(",") + 1));
-				insertVertex(data1);
-				insertVertex(data2);
+				avlTreeRoot = insertVertex(data1);
+				avlTreeRoot = insertVertex(data2);
 				insertEdge(data1, data2);
 			}
 			insertFile.close();

@@ -9,7 +9,7 @@
 using namespace std;
 
 class GraphOperator {
-/*
+
 	public:
 
 		map<int, bool> visitedDFS;
@@ -33,7 +33,8 @@ class GraphOperator {
 			}
 
 		}
-
+	
+		/*
 		// function that uses BFS to print all connected components
 		void connectedComponents(int start, GraphGenerator graph, Node * root) {
 			

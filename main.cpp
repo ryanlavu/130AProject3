@@ -9,7 +9,7 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
 	GraphGenerator graphs(argv[1]);
-	Node * rootNode = graphs.avlRootTree;
+	Node * rootNode = graphs.avlTreeRoot;
 	cout << "The in order traversal:" << endl;
 	graphs.inOrder(rootNode);
 	cout << "The pre order traversal:" << endl;

@@ -48,12 +48,12 @@ class GraphGenerator {
 					break;
 				cout << query << endl;
 				cout << query.substr(0,query.find(",")) << endl;
-				cout << query.substr(query.find(",")) << endl;
+				cout << query.substr(query.find(",")) << endl; /*
 				data1 = stoi(query.substr(0,query.find(",")));
 				data2 = stoi(query.substr(query.find(",")));
 				insertVertex(data1);
 				insertVertex(data2);
-				insertEdge(data1, data2);
+				insertEdge(data1, data2); */
 			}
 			insertFile.close();
 		}

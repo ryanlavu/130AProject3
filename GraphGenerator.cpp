@@ -72,6 +72,13 @@ class GraphGenerator {
 			return node;
 
 		}
+	
+		int height(Node * node) {
+		
+			if(node == NULL) return 0;
+			return node->height;
+		
+		}
 
 		// function that rotates a tree right based on a given root
 		Node * rotateRight(Node * root) {

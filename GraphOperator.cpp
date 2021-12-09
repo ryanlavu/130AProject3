@@ -30,6 +30,7 @@ class GraphOperator {
 			llNode * curr = graph.getAdjList(start);
 			
 			cout << "After adjList" << endl;
+			cout << curr->number << endl;
 			
 			while(curr->next) {
 				cout << "Checking for " << start << endl;

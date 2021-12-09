@@ -21,15 +21,15 @@ class GraphOperator {
 		// function that uses DFS to check for cycles
 		bool isAcyclic(int start, GraphGenerator graph) {
 
+			cout << "Checking: " << start << endl;
+			
 			visitedDFS[start] = true;
-
-			bool allVisited = true;
 			llNode * curr = graph.getAdjList(start);
 			
 			while(curr->next) {
+				cout << "Checking for " << start << endl;
 				if(visitedDFS.find(curr->next->number)->second) return true;
 				if(!visitedDFS.find(curr->next->number)->second) return isAcyclic(curr->next->number, graph);
-
 			}
 
 		}

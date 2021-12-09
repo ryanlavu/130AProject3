@@ -27,8 +27,8 @@ class GraphOperator {
 			llNode * curr = graph.getAdjList(start);
 			
 			while(curr->next) {
-				if(visitedDFS.find(curr->next->number)) return true;
-				if(!visitedDFS.find(curr->next->number)) return isAcyclic(curr->next->number, graph);
+				if(visitedDFS.find(curr->next->number)->second) return true;
+				if(!visitedDFS.find(curr->next->number)->second) return isAcyclic(curr->next->number, graph);
 
 			}
 

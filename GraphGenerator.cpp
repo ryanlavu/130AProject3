@@ -164,6 +164,8 @@ class GraphGenerator {
 			// goes to the correct child depending on data comparison
 			if(data < node->number) return lookup(node->leftChild, data);
 			else if(data > node->number) return lookup(node->rightChild, data);
+			
+			return NULL;
 
 		}
 

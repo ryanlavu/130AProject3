@@ -32,7 +32,7 @@ using namespace std;
 class GraphGenerator {
 
 	public:
-		Node * avlTreeRoot;
+		Node * avlTreeRoot = NULL;
 		
 		//Constructs GraphGenerator object with input file
 		GraphGenerator(string inputFile1)
@@ -51,8 +51,8 @@ class GraphGenerator {
 				cout << query.substr(query.find(",") + 1) << endl; 
 				data1 = stoi(query.substr(0,query.find(",")));
 				data2 = stoi(query.substr(query.find(",") + 1));
-				avlTreeRoot = insertVertex(data1);
-				avlTreeRoot = insertVertex(data2);
+				insertVertex(data1);
+				insertVertex(data2);
 				insertEdge(data1, data2);
 			}
 			insertFile.close();
@@ -194,8 +194,12 @@ class GraphGenerator {
 		// function that checks if vertex exists and if not it inserts
 		void insertVertex(int data) {
 
+			cout << "Before lookup" << endl;
+			
 			// lookup to see if the vertex already exists
 			Node * searched = lookup(avlTreeRoot, data);
+			
+			cout << "Before insert" << endl;
 
 			// if it doesn't exist insert
 			if(searched == NULL) avlTreeRoot = insert(avlTreeRoot, data);

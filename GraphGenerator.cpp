@@ -48,7 +48,7 @@ class GraphGenerator {
 					break;
 				cout << query << endl;
 				cout << query.substr(0,query.find(",")) << endl;
-				cout << query.substr(query.find(",")) << endl; 
+				cout << query.substr(query.find(",") + 1) << endl; 
 				data1 = stoi(query.substr(0,query.find(",")));
 				data2 = stoi(query.substr(query.find(",") + 1));
 				insertVertex(data1);

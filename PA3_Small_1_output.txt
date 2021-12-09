@@ -1,0 +1,9 @@
+The in order traversal:
+1 2 3 4 5 6 7 8 9 10
+The pre order traversal:
+6 3 1 2 4 5 8 7 10 9
+Is acyclic(Yes/No):
+No
+Connected Components:
+1 2 3 4 9
+5 6 7 8 10

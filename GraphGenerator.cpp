@@ -62,7 +62,7 @@ class GraphGenerator {
 
 			Node * node = new Node();
 
-			adjList == NULL;
+			node->adjList == NULL;
 			
 			node->number = data;
 			node->leftChild = NULL;

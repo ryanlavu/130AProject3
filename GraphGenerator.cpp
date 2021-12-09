@@ -46,9 +46,6 @@ class GraphGenerator {
 			{
 				if(query.empty())
 					break;
-				cout << query << endl;
-				cout << query.substr(0,query.find(",")) << endl;
-				cout << query.substr(query.find(",") + 1) << endl; 
 				data1 = stoi(query.substr(0,query.find(",")));
 				data2 = stoi(query.substr(query.find(",") + 1));
 				insertVertex(data1);
@@ -130,13 +127,9 @@ class GraphGenerator {
 
 		// function that inserts a value into the tree
 		Node * insert(Node * node, int data) {
-
-			cout << "Insert: " << data << endl;
 			
 			// create a new node as the leaf
 			if(node == NULL) return createNode(data);
-			
-			cout << "After null check" << endl;
 
 			// inserts to left side if value is less than the node value
 			if(data < node->number) node->leftChild = insert(node->leftChild, data);
@@ -144,8 +137,6 @@ class GraphGenerator {
 			else if(data > node->number) node->rightChild = insert(node->rightChild, data);
 			// cannot have duplicate values in the tree so it exits
 			else return node;
-			
-			cout << "After child check" << endl;
 
 			// update the new height for the root node
 			node->height = max(height(node->leftChild), height(node->rightChild)) + 1;
@@ -236,14 +227,10 @@ class GraphGenerator {
 
 		// function that inserts an edge into the adj list
 		void insertEdge(int first, int second) {
-
-			cout << "before insert edge" << endl;
 			
 			// create two nodes to store vertices from lookup
 			Node * firstVertex = lookup(avlTreeRoot, first);
 			Node * secondVertex = lookup(avlTreeRoot, second);
-
-			cout << "before llInsert" << endl;
 			
 			// insert into the others adj list
 			llInsert(firstVertex->adjList, second);

@@ -124,8 +124,12 @@ class GraphGenerator {
 		// function that inserts a value into the tree
 		Node * insert(Node * node, int data) {
 
+			cout << "Insert: " << data << endl;
+			
 			// create a new node as the leaf
 			if(node == NULL) return createNode(data);
+			
+			cout << "After null check" << endl;
 
 			// inserts to left side if value is less than the node value
 			if(data < node->number) node->leftChild = insert(node->leftChild, data);

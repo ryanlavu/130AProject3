@@ -9,6 +9,7 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
 	GraphGenerator graphs(argv[1]);
+	GraphOperator * op = new GraphOperator();
 	Node * rootNode = graphs.avlTreeRoot;
 	cout << "The in order traversal:" << endl;
 	graphs.inOrder(rootNode);
@@ -18,7 +19,7 @@ int main(int argc, char *argv[]) {
 	cout << endl;
 	
 	cout << "Is acyclic(Yes/No):" << endl;
-	if(isAcyclic(graphs))
+	if(op->isAcyclic(graphs))
 	{
 		cout << "Yes" << endl;
 	}	

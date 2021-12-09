@@ -137,6 +137,8 @@ class GraphGenerator {
 			else if(data > node->number) node->rightChild = insert(node->rightChild, data);
 			// cannot have duplicate values in the tree so it exits
 			else return node;
+			
+			cout << "After child check" << endl;
 
 			// update the new height for the root node
 			node->height = max(node->leftChild->height, node->rightChild->height) + 1;

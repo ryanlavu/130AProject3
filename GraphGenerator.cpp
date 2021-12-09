@@ -85,8 +85,8 @@ class GraphGenerator {
 			root->leftChild = nrRightTree;
 
 			// fix the heights for new tree
-			root->height = max(root->leftChild->height, root->rightChild->height) + 1;
-			newRoot->height = max(newRoot->leftChild->height, newRoot->rightChild->height) + 1;
+			root->height = max(height(root->leftChild), height(root->rightChild)) + 1;
+			newRoot->height = max(height(newRoot->leftChild), height(newRoot->rightChild)) + 1;
 
 			return newRoot;
 
@@ -104,8 +104,8 @@ class GraphGenerator {
 			root->rightChild = nrLeftTree;
 
 			// fix the heights for new tree
-			root->height = max(root->leftChild->height, root->rightChild->height) + 1;
-			newRoot->height = max(newRoot->leftChild->height, newRoot->rightChild->height) + 1;
+			root->height = max(height(root->leftChild), height(root->rightChild)) + 1;
+			newRoot->height = max(height(newRoot->leftChild), height(newRoot->rightChild)) + 1;
 
 			return newRoot;
 
@@ -116,7 +116,7 @@ class GraphGenerator {
 
 			if(node == NULL) return 0;
 			// positive means left is higher, negative means right is higher
-			int balance = node->leftChild->height - node->rightChild->height;
+			int balance = height(node->leftChild) - height(node->rightChild);
 			return balance;
 
 		}
@@ -141,7 +141,7 @@ class GraphGenerator {
 			cout << "After child check" << endl;
 
 			// update the new height for the root node
-			node->height = max(node->leftChild->height, node->rightChild->height) + 1;
+			node->height = max(height(node->leftChild), height(node->rightChild)) + 1;
 
 			// check the balance of the current node
 			int balance = getBalance(node);

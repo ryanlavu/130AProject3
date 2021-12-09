@@ -12,8 +12,10 @@ int main(int argc, char *argv[]) {
 	Node * rootNode = graphs.avlTreeRoot;
 	cout << "The in order traversal:" << endl;
 	graphs.inOrder(rootNode);
+	cout << endl;
 	cout << "The pre order traversal:" << endl;
 	graphs.preOrder(rootNode);
+	cout << endl;
 	/*
 	cout << "Is acyclic(Yes/No):" << endl;
 	if(isAcyclic(graphs))

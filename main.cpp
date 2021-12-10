@@ -28,8 +28,7 @@ int main(int argc, char *argv[]) {
 		cout << "No" << endl;
 	}
 	
-	// TODO - Remove comments
 	cout << "Connected Components:" << endl;
 	Node * node1 = graphs.avlTreeRoot;
-	//op->connectedComponents(node1->number, graphs, node1); 
+	op->connectedComponents(node1->number, graphs, node1); 
 }

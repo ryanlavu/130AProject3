@@ -149,11 +149,8 @@ class GraphGenerator {
 		// function that inserts a value into the tree
 		Node * insert(Node * node, int data) {
 
-			//cout << "insert1: " << node << ": data:" << data << endl;
 			// create a new node as the leaf
 			if(node == NULL) return createNode(data);
-
-			//cout << "insert2: " << endl;
 
 			// inserts to left side if value is less than the node value
 			if(data < node->number) node->leftChild = insert(node->leftChild, data);
@@ -162,35 +159,26 @@ class GraphGenerator {
 			// cannot have duplicate values in the tree so it exits
 			else return node;
 
-			//cout << "insert3: " << endl;
-
 			// update the new height for the root node
 			int leftHeight = (node->leftChild? node->leftChild->height : 0);
 			int rightHeight = (node->rightChild? node->rightChild->height: 0);
 			node->height = max(leftHeight, rightHeight) + 1;
 
-			//4: " << endl;
-
 			// check the balance of the current node
 			int balance = getBalance(node);
-			//cout << "insert5: " << endl;
 
 			// rotate the tree based on the balance
 			if(balance > 1 && data < node->leftChild->number) {
-			//cout << "insert8: " << endl;
 			    return rotateRight(node);
 			}
 			else if(balance < - 1 && data > node->rightChild->number) {
-			//cout << "insert9: " << endl;
 			return rotateLeft(node);
 			}
 			else if(balance > 1 && data > node->leftChild->number) {
-			//cout << "insert6: " << endl;
 				node->leftChild = rotateLeft(node->leftChild);
 				return rotateRight(node);
 
 			} else if(balance < - 1 && data < node->rightChild->number) {
-			//cout << "insert7: " << endl;
 				node->rightChild = rotateRight(node->rightChild);
 				return rotateLeft(node);
 
@@ -216,7 +204,7 @@ class GraphGenerator {
 		// function that inserts a llNode into a linked list
 		void llInsert(llNode * start, int data) {
 
-            	//cout << "llInsert: start:" << start << ": data:" << data << endl;
+            //cout << "llInsert: start:" << start << ": data:" << data << endl;
 			llNode * current = start;
 
 			while(current->next) {
@@ -227,7 +215,7 @@ class GraphGenerator {
                 current = current->next;
 			}
 
-            	//cout << "llInsert2" << endl;
+            //cout << "llInsert2" << endl;
 			llNode * newLLNode = new llNode();
 			newLLNode->number = data;
 
@@ -236,12 +224,12 @@ class GraphGenerator {
 		}
 
 		// function that checks if vertex exists and if not it inserts
-			bool insertVertex(int data) {
+		bool insertVertex(int data) {
 
-			if (avlTreeRoot == NULL){
-                		avlTreeRoot = createNode(data);
-				return true;
-            		}
+            if (avlTreeRoot == NULL){
+                avlTreeRoot = createNode(data);
+                return true;
+            }
 
 
 			// lookup to see if the vertex already exists
@@ -259,7 +247,7 @@ class GraphGenerator {
 
 		// function that inserts an edge into the adj list
 		void insertEdge(int first, int second) {
-            	//cout << "insertEdge: first:" << first << ":second:" << second << endl;
+            //cout << "insertEdge: first:" << first << ":second:" << second << endl;
 
 			// create two nodes to store vertices from lookup
 			Node * firstVertex = lookup(avlTreeRoot, first);
@@ -311,7 +299,7 @@ class GraphGenerator {
 		llNode * getAdjList(int data) {
 
 			return lookup(avlTreeRoot, data)->adjList;
-		
+
 		}
 };
 

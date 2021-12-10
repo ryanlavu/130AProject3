@@ -92,7 +92,7 @@ class GraphOperator {
 		Node * leftNode = root->leftChild;
 		Node * rightNode = root->rightChild;
 		if(leftNode != NULL) {
-			   // cout << "call LEFT  again: " << leftNode->number;
+			// cout << "call LEFT  again: " << leftNode->number;
 			connectedComponents(leftNode->number, graph, leftNode);
 		}
 		if(rightNode != NULL) {
@@ -141,21 +141,24 @@ class GraphOperator {
 
 				//only stop looking at adjacent vertices of the current vertice when there are no more
 
-                                while(curr != NULL && curr->next)
+                                while(curr != NULL && curr->next != NULL)
                                 {
 					//If a node hasn't been visited already, push it onto the queue, mark it visited, push it onto the vector
 
                                         //if(!visitedBFS.find(curr->next->number))
+					cout << "before!" << endl;
                                         std::map<int, bool>::iterator it = visitedDFS.find(curr->next->number);
+					cout << "after!" << endl;
                                         if(it != visitedBFS.end() && !it->second)
-                                        {
-                                        	cout << "find in whileloop3:" << endl;
+                                       	{
+                                        	cout << "find in whileloop3: " <<  curr->next->number << endl;
                                                 queueAdj.push_back(curr->next->number);
                                                 visitedBFS[curr->next->number] = true;
 						v.push_back(curr->next->number);
                                         }
-
+					//cout << "Before!" << endl;
                                         curr = curr->next;
+					//cout << "AFTER" << endl;
                                 }
 			}
 

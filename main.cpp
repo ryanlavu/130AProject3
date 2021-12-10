@@ -17,7 +17,8 @@ int main(int argc, char *argv[]) {
 	cout << "The pre order traversal:" << endl;
 	graphs.preOrder(rootNode);
 	cout << endl;
-	
+
+	/*	
 	cout << "Is acyclic(Yes/No):" << endl;
 	if(op->isAcyclic(1, graphs))
 	{
@@ -27,9 +28,10 @@ int main(int argc, char *argv[]) {
 	{
 		cout << "No" << endl;
 	}
+	*/
 	
-	/*
+	
 	cout << "Connected Components:" << endl;
 	Node * node1 = graphs.avlTreeRoot;
-	connectedComponents(node1->number, graphs, node1); */
+	op->connectedComponents(node1->number, graphs, node1);
 }

@@ -44,153 +44,134 @@ class GraphOperator {
 
 				
 	bool isAcyclic(GraphGenerator graph) {
-        		    if (graph.avlTreeRoot == NULL) {
-        		        return false;
-        		    }
-        		    Node *node  = graph.avlTreeRoot;
-        		    bool result = false;
-        		    isAcyclicChk(node, graph, &result);
-        		    //isAcyclic(node->number, node->number, graph);
+		if (graph.avlTreeRoot == NULL) {
+        		return false;
+		}
 
-                    //cout << "isCyclic TODO:" << isCyclic;
-        		    return !isCyclic;
-        		}
+        	Node *node  = graph.avlTreeRoot;
+        	bool result = false;
+        	isAcyclicChk(node, graph, &result);
+      		//isAcyclic(node->number, node->number, graph);
+
+        	return !isCyclic;
+        }
 
         bool isCyclic = false;
 
-		bool isAcyclic(int start, int num, GraphGenerator graph) {
+	bool isAcyclic(int start, int num, GraphGenerator graph) {
 		//cout << "isAcyclic, start:" << start << ", num:" << num << endl;
-		    visitedDFS[start] = true;
-            llNode * curr = graph.getAdjList(start);
-            if (curr != NULL) {
-                curr = curr->next;
-            }
+		visitedDFS[start] = true;
+            	llNode * curr = graph.getAdjList(start);
+            	if (curr != NULL) {
+                	curr = curr->next;
+            	}
 
-            while(curr != NULL) {
-                //cout << "checking : start: " << start << ":num:" << num << ":" << ":inloop:" << curr->number << endl;
-		      if (visitedDFS.find(curr->number) == visitedDFS.end()) {
-		         visitedDFS[curr->number] = true;
-		         isAcyclic(curr->number, start, graph);
-		      } else if (start != num && curr->number != num) {
-		         isCyclic = true;
-		         return true;
-		      }
-		      curr = curr->next;
-		    }
+            	while(curr != NULL) {
+                	//cout << "checking : start: " << start << ":num:" << num << ":" << ":inloop:" << curr->number << endl;
+			if (visitedDFS.find(curr->number) == visitedDFS.end()) {
+				visitedDFS[curr->number] = true;
+		        	isAcyclic(curr->number, start, graph);
+			} 
+			else if (start != num && curr->number != num) {
+				isCyclic = true;
+		        	return true;
+			}
+		      	curr = curr->next;
 		}
+	}
 
-		// function that uses BFS to print all connected components
-		void connectedComponents(int start, GraphGenerator graph, Node * root) {
+	// function that uses BFS to print all connected components
+	void connectedComponents(int start, GraphGenerator graph, Node * root) {
 
-            cout << "connectedComponents: start: " << start << "root: " << root << endl;
+		cout << "connectedComponents: start: " << start << "root: " << root << endl;
 
-			//Find the connected component of the root argument vertice
-			findConnectedComponents(start, graph, root);
+		//Find the connected component of the root argument vertice
+		findConnectedComponents(start, graph, root);
 			
-			//Go through entire AVL tree to find all connected components
-			Node * leftNode = root->leftChild;
-			Node * rightNode = root->rightChild;
-			if(leftNode != NULL) {
+		//Go through entire AVL tree to find all connected components
+		Node * leftNode = root->leftChild;
+		Node * rightNode = root->rightChild;
+		if(leftNode != NULL) {
 			   // cout << "call LEFT  again: " << leftNode->number;
-				connectedComponents(leftNode->number, graph, leftNode);
-			}
-			if(rightNode != NULL) {
-			//cout << "call RIGHT again: " << leftNode->number;
-				connectedComponents(rightNode->number, graph, rightNode);
-			}
-
+			connectedComponents(leftNode->number, graph, leftNode);
 		}
+		if(rightNode != NULL) {
+			//cout << "call RIGHT again: " << leftNode->number;
+			connectedComponents(rightNode->number, graph, rightNode);
+		}
+
+	}
 
 		
 
-		void findConnectedComponents(int start, GraphGenerator graph, Node * root){
-			cout << "findConnectedComponents: " << start << ":root" << root << endl;
-			//create a list of connected vertices
-			vector<int> queueAdj;
-			int vectorBack;
+	void findConnectedComponents(int start, GraphGenerator graph, Node * root){
+		cout << "findConnectedComponents: " << start << ":root" << root << endl;
+		//create a list of connected vertices
+		vector<int> queueAdj;
+		int vectorBack;
 
-			//if the starting vertice is already visited, no use in continuing as its connected component already found
+		//if the starting vertice is already visited, no use in continuing as its connected component already found
+		//if (!visitedBFS.find(start))
+		std::map<int, bool>::iterator it = visitedDFS.find(start);
+		//if(it == visitedBFS.end() && !it->second)
+		if (it == visitedDFS.end())
+            	{
+			//Found a new component, increment the 2d vector
+			bfsVectorCounter++;
 
-			// TODO - Change this
-			//if (!visitedBFS.find(start))
-			std::map<int, bool>::iterator it = visitedDFS.find(start);
-			//if(it == visitedBFS.end() && !it->second)
-			if (it == visitedDFS.end())
-            {
-            //cout << "find1" << endl;
-				//Found a new component, increment the 2d vector
-				bfsVectorCounter++;
+			//If starting vertice not visited, mark it as visited and push the vertice onto vector
+                	visitedBFS[start] = true;
+                	vector<int> v;
 
-				//If starting vertice not visited, mark it as visited and push the vertice onto vector
-                visitedBFS[start] = true;
-                //cout << "find3" << endl;
+			v.push_back(start);
+			vectorBFS.push_back(v);
 
-                // TODO
-                vector<int> v;
+			//let the current vertice be pushed onto queueAdj
+			llNode * curr;
+			queueAdj.push_back(start);
 
-				v.push_back(start);
-				vectorBFS.push_back(v);
+			//only stop looking when no more connected vertices left
+			while(!queueAdj.empty())
+			{
+				//let the current vertice be grabbed from queueAdj
+				vectorBack = queueAdj.back();
+				curr = graph.getAdjList(vectorBack);
 
-            cout << "find2" << endl;
-				//let the current vertice be pushed onto queueAdj
-                                llNode * curr;
-				queueAdj.push_back(start);
+				queueAdj.pop_back();
 
-				//only stop looking when no more connected vertices left
-				while(!queueAdj.empty())
-				{
-				    //cout << "find in loop1" << endl;
-					//let the current vertice be grabbed from queueAdj
-					vectorBack = queueAdj.back();
-					//cout << "find in loop2" << endl;
-					curr = graph.getAdjList(vectorBack);
-					//cout << "find in loop3" << endl;
+				//only stop looking at adjacent vertices of the current vertice when there are no more
 
-					queueAdj.pop_back();
+                                while(curr != NULL && curr->next)
+                                {
+					//If a node hasn't been visited already, push it onto the queue, mark it visited, push it onto the vector
 
-					//only stop looking at adjacent vertices of the current vertice when there are no more
-
-                                	// TODO
-                                	while(curr != NULL && curr->next)
-                                	{
-                                		//cout << "find in whileloop1:" << curr->next->number << endl;
-
-						//If a node hasn't been visited already, push it onto the queue, mark it visited, push it onto the vector
-
-                                        	//if(!visitedBFS.find(curr->next->number))
-                                        	// TODO - Change the above line to this
-                                        	std::map<int, bool>::iterator it = visitedDFS.find(curr->next->number);
-                                        	//cout << "find in whileloop2:" << endl;
-                                            			if(it != visitedBFS.end() && !it->second)
-                                        	{
+                                        //if(!visitedBFS.find(curr->next->number))
+                                        std::map<int, bool>::iterator it = visitedDFS.find(curr->next->number);
+                                        if(it != visitedBFS.end() && !it->second)
+                                        {
                                         	cout << "find in whileloop3:" << endl;
-                                                	queueAdj.push_back(curr->next->number);
-                                                	visitedBFS[curr->next->number] = true;
-                                                	//cout << "find in whileloop4:" << endl;
-                                                	// TODO
-							                        //vectorBFS[bfsVectorCounter].push_back(curr->next->number);
-							                        v.push_back(curr->next->number);
-                                        	}
+                                                queueAdj.push_back(curr->next->number);
+                                                visitedBFS[curr->next->number] = true;
+						v.push_back(curr->next->number);
+                                        }
 
-                                        	// TODO
-                                        	curr = curr->next;
-                                	}
-				}
+                                        curr = curr->next;
+                                }
+			}
 
-            //cout << "find4" << endl;
-				//Sort and print out the vector
-				std::sort(vectorBFS[bfsVectorCounter].begin(), vectorBFS[bfsVectorCounter].end());
-				for(int i = 0; i < vectorBFS[bfsVectorCounter].size(); i++)
+			//Sort and print out the vector
+			std::sort(vectorBFS[bfsVectorCounter].begin(), vectorBFS[bfsVectorCounter].end());
+			for(int i = 0; i < vectorBFS[bfsVectorCounter].size(); i++)
+			{
+				cout << vectorBFS[bfsVectorCounter][i];
+				if(i < vectorBFS[bfsVectorCounter].size()-1)
 				{
-					cout << vectorBFS[bfsVectorCounter][i];
-					if(i < vectorBFS[bfsVectorCounter].size()-1)
-					{
-						cout << " ";
-					}
+					cout << " ";
 				}
-				cout << endl;
-            }
-		}
+			}
+			cout << endl;
+	    }
+	}
 
 };
 

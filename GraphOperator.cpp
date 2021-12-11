@@ -18,16 +18,16 @@ class GraphOperator {
 		vector<vector<int>> vectorBFS;
         bool isAcyclicGraph = true;
 
-	    	void chkAcyclic(Node *node, GraphGenerator graph, bool *result){
-            	if(node == NULL || !*result) return;
+    void chkAcyclic(Node *node, GraphGenerator graph, bool *result){
+        if(node == NULL || !*result) return;
 
-            	isAcyclic(node->number, node->number, graph);
-            	if(!isAcyclicGraph) return;
+        isAcyclic(node->number, node->number, graph);
+        if(!isAcyclicGraph) return;
 
-            	chkAcyclic(node->leftChild, graph, result);
-            	if (!isAcyclicGraph) return;
+        chkAcyclic(node->leftChild, graph, result);
+        if (!isAcyclicGraph) return;
 
-            	chkAcyclic(node->rightChild, graph, result);
+        chkAcyclic(node->rightChild, graph, result);
 	}
 
 				
@@ -45,20 +45,20 @@ class GraphOperator {
 	// Checks whether the graph is acyclic or not
 	bool isAcyclic(int start, int num, GraphGenerator graph) {
 		visitedDFS[start] = true;
-            	llNode * curr = graph.getAdjList(start);
-           	if (curr != NULL) {
-                	curr = curr->next;
-            	}
-            	while(curr != NULL) {
-		      	if (visitedDFS.find(curr->number) == visitedDFS.end()) {
-				visitedDFS[curr->number] = true;
-		         	isAcyclic(curr->number, start, graph);
-		      	} 
-			else if (start != num && curr->number != num) {
-		         	isAcyclicGraph = false;
-		         	return false;
-		      	}
-		      	curr = curr->next;
+        llNode * curr = graph.getAdjList(start);
+        if (curr != NULL) {
+                curr = curr->next;
+        }
+        while(curr != NULL) {
+            if (visitedDFS.find(curr->number) == visitedDFS.end()) {
+                visitedDFS[curr->number] = true;
+                isAcyclic(curr->number, start, graph);
+            }
+            else if (start != num && curr->number != num) {
+                isAcyclicGraph = false;
+                return false;
+            }
+            curr = curr->next;
 		}
 	}
 
@@ -68,46 +68,44 @@ class GraphOperator {
 	void connectedComponents(int start, GraphGenerator graph) {
 		vectorBFS.clear();
 		Node *root = graph.avlTreeRoot;
-            	connectedComponents2(start, graph, root);
+        connectedComponents2(start, graph, root);
 
-            	for (int i=0; i< vectorBFS.size(); i++){
-                	std::sort(vectorBFS[i].begin(), vectorBFS[i].end());
-            	}
+        for (int i=0; i< vectorBFS.size(); i++){
+            std::sort(vectorBFS[i].begin(), vectorBFS[i].end());
+        }
 
-            	std::sort(vectorBFS.begin(), vectorBFS.end(),
-                [](const vector<int> & a, const vector<int> & b){
-                    	return a[0] < b[0]; });
-            	for (int i=0; i < vectorBFS.size(); i++){
-                	vector<int> v = vectorBFS[i];
-                	for (int j=0; j< v.size(); j++){
-                    		cout << v[j];
-                    		cout << " ";
-                	}
-                	cout << endl;
-            	}
+        std::sort(vectorBFS.begin(), vectorBFS.end(),
+        [](const vector<int> & a, const vector<int> & b){
+                return a[0] < b[0]; });
+        for (int i=0; i < vectorBFS.size(); i++){
+            vector<int> v = vectorBFS[i];
+            for (int j=0; j< v.size(); j++){
+                    cout << v[j];
+                    cout << " ";
+            }
+            cout << endl;
+        }
 	}
 
-        void connectedComponents2(int start, GraphGenerator graph, Node * root) {
-			//Find the connected component of the root argument
-			findConnectedComponents(start, graph, root);
+    void connectedComponents2(int start, GraphGenerator graph, Node * root) {
+        //Find the connected component of the root argument
+        findConnectedComponents(start, graph, root);
 
-			//Go through entire AVL tree to find all connected components
-			Node * leftNode = root->leftChild;
-			Node * rightNode = root->rightChild;
-			if(leftNode != NULL) {
-				connectedComponents2(leftNode->number, graph, leftNode);
-			}
-			if(rightNode != NULL) {
-				connectedComponents2(rightNode->number, graph, rightNode);
-			}
-
-
-		}
-
-
-        static bool sortNode( const vector<int>& v1, const vector<int>& v2 ) {
-		return v1[0] < v2[0];
+        //Go through entire AVL tree to find all connected components
+        Node * leftNode = root->leftChild;
+        Node * rightNode = root->rightChild;
+        if(leftNode != NULL) {
+            connectedComponents2(leftNode->number, graph, leftNode);
         }
+        if(rightNode != NULL) {
+            connectedComponents2(rightNode->number, graph, rightNode);
+        }
+    }
+
+
+    static bool sortNode( const vector<int>& v1, const vector<int>& v2 ) {
+    return v1[0] < v2[0];
+    }
 
 	void findConnectedComponents(int start, GraphGenerator graph, Node * root){
 		//create a list of connected vertices
@@ -134,22 +132,22 @@ class GraphOperator {
 				queueAdj.pop_back();
 
 				//only stop looking at adjacent vertices of the current vertice when there are no more
-                    		while(curr != NULL && curr->next)
-                    		{
-					//If a node hasn't been visited already, push it onto the queue, mark it visited, push it onto the vector
-                        		std::map<int, bool>::iterator it = visitedBFS.find(curr->next->number);
-                        		if(it == visitedBFS.end())
-                        		{
-                            			queueAdj.push_back(curr->next->number);
-                            			visitedBFS[curr->next->number] = true;
-                            			v.push_back(curr->next->number);
-                        		}
-                        		curr = curr->next;
-                    		}
+                while(curr != NULL && curr->next)
+                {
+				//If a node hasn't been visited already, push it onto the queue, mark it visited, push it onto the vector
+                std::map<int, bool>::iterator it = visitedBFS.find(curr->next->number);
+                if(it == visitedBFS.end())
+                    {
+                            queueAdj.push_back(curr->next->number);
+                            visitedBFS[curr->next->number] = true;
+                            v.push_back(curr->next->number);
+                    }
+                    curr = curr->next;
+                }
 			}
 
-                	vectorBFS.push_back(v);
-            	}
+            vectorBFS.push_back(v);
+        }
 	}
 
 };

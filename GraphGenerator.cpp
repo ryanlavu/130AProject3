@@ -7,27 +7,27 @@
 
 using namespace std;
 
-		// struct used to create the adj list linked list
-		struct llNode {
+// struct used to create the adj list linked list
+struct llNode {
 
-			int number;
-			llNode * next;
+    int number;
+    llNode * next;
 
-		};
+};
 
-		// struct used to create an AVL tree for the adj list
-		struct Node {
+// struct used to create an AVL tree for the adj list
+struct Node {
 
-			// data needed to create the adjacency list
-			int number;
-			llNode * adjList;
+    // data needed to create the adjacency list
+    int number;
+    llNode * adjList;
 
-			// data needed to create and balance the AVL tree
-			Node * leftChild;
-			Node * rightChild;
-			int height;
+    // data needed to create and balance the AVL tree
+    Node * leftChild;
+    Node * rightChild;
+    int height;
 
-		};
+};
 
 class GraphGenerator {
 
@@ -46,28 +46,22 @@ class GraphGenerator {
 			string query = "";
 			int data1 = 0;
 			int data2 = 0;
-			//cout << "INPUT FILE:" << inputFile1 << endl;
 			ifstream insertFile(inputFile1);
 			while(getline(insertFile, query))
 			{
-			//cout << "read input:" << query << endl;
 				if(query.empty())
 					break;
 				int index = query.find(",");
 				data1 = stoi(query.substr(0,index));
-				//cout << "data1: " << data1 << endl;
-				// << "data2:" << query.substr(index) << endl;
 				data2 = stoi(query.substr(index+1));
 				//cout << "data1:"<< data1 << ":data2: " << data2 << endl;
 				bool insertedNode1 = insertVertex(data1);
 				bool insertedNode2 = insertVertex(data2);
-			    //if (insertedNode1 || insertedNode2) {
-			        //cout << "insert edge: " << data1 << " :" << data2 << endl;
-				    insertEdge(data1, data2);
-				//}
+				insertEdge(data1, data2);
 			}
 			insertFile.close();
 		}
+
 		// function that initializes a new pointer to a node
 		Node * createNode(int data) {
 
@@ -83,7 +77,6 @@ class GraphGenerator {
 			return node;
 
 		}
-
 
 		// function that rotates a tree right based on a given root
 		Node * rotateRight(Node * root) {
@@ -116,7 +109,6 @@ class GraphGenerator {
 			root->rightChild = nrLeftTree;
 
 			// fix the heights for new tree
-			//root->height = max(root->leftChild->height, root->rightChild->height) + 1;
 			root->height = max(getLeftHeight(root), getRightHeight(root)) + 1;
 
 			newRoot->height = max(getLeftHeight(newRoot), getRightHeight(newRoot)) + 1;
@@ -130,10 +122,10 @@ class GraphGenerator {
             return node->leftChild->height;
         }
 
-                int getRightHeight(Node *node) {
-                    if (node->rightChild == NULL) return 0;
-                    return node->rightChild->height;
-                }
+        int getRightHeight(Node *node) {
+            if (node->rightChild == NULL) return 0;
+            return node->rightChild->height;
+        }
 
 		// function that checks if a node is balanced
 		int getBalance(Node * node) {
@@ -203,8 +195,6 @@ class GraphGenerator {
 
 		// function that inserts a llNode into a linked list
 		void llInsert(llNode * start, int data) {
-
-            //cout << "llInsert: start:" << start << ": data:" << data << endl;
 			llNode * current = start;
 
 			while(current->next) {
@@ -215,7 +205,6 @@ class GraphGenerator {
                 current = current->next;
 			}
 
-            //cout << "llInsert2" << endl;
 			llNode * newLLNode = new llNode();
 			newLLNode->number = data;
 
@@ -247,13 +236,10 @@ class GraphGenerator {
 
 		// function that inserts an edge into the adj list
 		void insertEdge(int first, int second) {
-            //cout << "insertEdge: first:" << first << ":second:" << second << endl;
 
 			// create two nodes to store vertices from lookup
 			Node * firstVertex = lookup(avlTreeRoot, first);
-			//"create firstVertex:" << firstVertex << endl;
 			Node * secondVertex = lookup(avlTreeRoot, second);
-			//cout << "create secondVertex: " << secondVertex << endl;
 
 			// insert into the others adj list
 			if (firstVertex->adjList == NULL){
@@ -265,7 +251,6 @@ class GraphGenerator {
 
 			llInsert(firstVertex->adjList, second);
 			llInsert(secondVertex->adjList, first);
-			//cout << "Insert first for second vertex. " << endl;
 
 		}
 
